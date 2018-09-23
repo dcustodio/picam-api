@@ -1,9 +1,12 @@
+const asyncHandler = require('express-async-handler')
+ 
 const raspberry = require('../src/raspberry')
 
-module.exports = (req, res,next) => {
+module.exports = asyncHandler(async(req, res,next) => {
 
-    raspberry.takePicture().then(function () {
-        throw new Error("BROKEN");
+    await raspberry.takePicture().then(function (result) {
+console.log(result)
+	res.send(result)
       }).catch(next); // Errors will be passed to Express.
    
-} 
+}) 
