@@ -6,6 +6,8 @@ const port = 3000
 
 app.get('/', (req, res) => res.send('pong!'))
 
-app.get('/picture', picture)
+app.get('/picture/:captureId', picture)
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+module.exports = app
