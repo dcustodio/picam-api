@@ -1,17 +1,20 @@
 const PiCamera = require('pi-camera')
-
-const myCamera = new PiCamera({
-    mode: 'photo',
-    output: `${__dirname}/${'pb-' + (new Date()).getTime()}.jpg`,
-    width: 640,
-    height: 480,
-    nopreview: true
-})
+const path = require('path')
+const appDir = path.dirname(require.main.filename)
+const filePath = path.join(appDir, `pictures`)
 
 module.exports = {
 
-    takePicture: function () {
+    takePicture: function (captureId) {
+
+	const myCamera = new PiCamera({
+	    mode: 'photo',
+	    output: `${filePath}/${'pb-' + captureId}.jpg`,
+	    width: 640,
+	    height: 480,
+	    nopreview: true
+	})
+
         return myCamera.snap()
     }
-
 }

@@ -16,7 +16,7 @@ const takePicture = asyncHandler(async (req, res, next) => {
     const filePath = path.join(appDir, `pictures/pb-${captureId}.jpg`)
 
     try {
-        await raspberry.takePicture().then(function (result) {
+        await raspberry.takePicture(captureId).then(function (result) {
             console.log(req.params.captureId)
             res.send(result)
         })
