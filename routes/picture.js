@@ -5,6 +5,7 @@ const path = require('path')
 const appDir = path.dirname(require.main.filename)
 const config = require('../config.json')
 const cloudinary = require('cloudinary')
+const debug = require('debug')('picture')
 
 const takePicture = asyncHandler(async (req, res, next) => {
     const captureId = req.body.captureId
@@ -17,7 +18,7 @@ const takePicture = asyncHandler(async (req, res, next) => {
 
     try {
         await raspberry.takePicture(captureId).then(function (result) {
-            console.log(req.params.captureId)
+            debug(req.params.captureId)
             res.send(result)
         })
 
@@ -27,10 +28,10 @@ const takePicture = asyncHandler(async (req, res, next) => {
             api_secret: config.cloudinaryClientSecret
         })
 
-        cloudinary.uploader.upload(filePath, function (result) { console.log(result) }, { public_id: captureId })
+        cloudinary.uploader.upload(filePath, function (result) { debug(result) }, { public_id: captureId })
     } catch (error) {
         // Errors will be passed to Express.
-
+        debug(error)
         next(error)
     }
 })

@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --no-cache",
     "start": "nodemon index.js --exec babel-node",
+    "debug": "set DEBUG=* & node index.js",
     "build": "babel src -d lib -s"
   },
   "keywords": [
@@ -19,6 +20,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cloudinary": "^1.11.0",
+    "debug": "^4.0.1",
     "express": "^4.16.3",
     "express-async-handler": "^1.1.4",
     "pi-camera": "^1.2.1"
