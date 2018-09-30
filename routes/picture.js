@@ -6,7 +6,7 @@ const appDir = path.dirname(require.main.filename)
 const config = require('../config.json')
 const cloudinary = require('cloudinary')
 
-export const takePicture = asyncHandler(async (req, res, next) => {
+const takePicture = asyncHandler(async (req, res, next) => {
     const captureId = req.body.captureId
 
     if (!captureId) {
@@ -35,7 +35,7 @@ export const takePicture = asyncHandler(async (req, res, next) => {
     }
 })
 
-export const getPicture = asyncHandler(async (req, res, next) => {
+const getPicture = asyncHandler(async (req, res, next) => {
     if (!req.params.captureId) {
         res.status(400).send('CaptureID required')
     }
@@ -61,3 +61,8 @@ export const getPicture = asyncHandler(async (req, res, next) => {
         next(error)
     }
 })
+
+module.exports = {
+    getPicture,
+    takePicture
+}
