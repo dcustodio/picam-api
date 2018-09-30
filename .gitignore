@@ -1,3 +1,5 @@
 node_modules
 **/*.jpg
 .vscode
+config.json
+pi-cam*.json
