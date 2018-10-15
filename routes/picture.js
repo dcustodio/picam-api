@@ -17,10 +17,13 @@ const takePicture = asyncHandler(async (req, res, next) => {
     const filePath = path.join(appDir, `pictures/pb-${captureId}.jpg`)
 
     try {
-        await raspberry.takePicture(captureId).then(function (result) {
-            debug(req.params.captureId)
-            res.send(result)
-        })
+        raspberry.takePicture(captureId)
+		.then(function (result) {
+            debug('result', result)
+	 })
+	//res.json(result)
+            res.send(req.body)
+      
 
         cloudinary.config({
             cloud_name: config.cloudinaryCloudName,
@@ -28,7 +31,7 @@ const takePicture = asyncHandler(async (req, res, next) => {
             api_secret: config.cloudinaryClientSecret
         })
 
-        cloudinary.uploader.upload(filePath, function (result) { debug(result) }, { public_id: captureId })
+        //cloudinary.uploader.upload(filePath, function (result) { debug(result) }, { public_id: captureId })
     } catch (error) {
         // Errors will be passed to Express.
         debug(error)
