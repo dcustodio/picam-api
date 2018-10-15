@@ -8,21 +8,22 @@ const debug = require('debug')('main')
 
 app.use(bodyParser.json())
 
-
-var corsOptions = {
-  origin: 'http://localhost:8080',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+// var corsOptions = {
+//     origin: 'http://localhost:8080',
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
 
 app.use(cors())
 
 app.get('/', (req, res) => res.send('pong!'))
 
 app.post('/picture', pictureRoute.takePicture)
-//app.post('/picture',function(req,res,next){
+// app.post('/picture',function(req,res,next){
 //	res.json({msg: 'hello'})
-//})
+// })
 app.get('/picture/:captureId', pictureRoute.getPicture)
+
+app.get('/picture/', pictureRoute.getPictures)
 
 app.listen(port, () => debug(`Example app listening on port ${port}!`))
 
