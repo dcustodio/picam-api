@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
-app.get('/', (req, res) => res.send('pong!'))
+app.get('/ping', (req, res) => res.send('pong!'))
 
 app.post('/picture', pictureRoute.takePicture)
 // app.post('/picture',function(req,res,next){
