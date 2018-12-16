@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler')
 const raspberry = require('../src/raspberry')
-const fs = require('fs')
 const path = require('path')
 const appDir = path.dirname(require.main.filename)
 const config = require('../config.json')
@@ -50,25 +49,7 @@ const takePicture = asyncHandler(async (req, res, next) => {
                     debug(result)
                 }, { public_id: captureId })
             })
-        // res.json(result)
         res.send(req.body)
-
-        /*
-        {
-public_id: 'cr4mxeqx5zb8rlakpfkg',
-version: 1372275963,
-signature: '63bfbca643baa9c86b7d2921d776628ac83a1b6e',
-width: 864,
-height: 576,
-format: 'jpg',
-resource_type: 'image',
-created_at: '2017-06-26T19:46:03Z',
-bytes: 120253,
-type: 'upload',
-url: 'https://res.cloudinary.com/demo/image/upload/v1372275963/cr4mxeqx5zb8rlakpfkg.jpg',
-secure_url: 'https://res.cloudinary.com/demo/image/upload/v1372275963/cr4mxeqx5zb8rlakpfkg.jpg'
-}
-        */
     } catch (error) {
     // Errors will be passed to Express.
         debug(error)
@@ -83,23 +64,9 @@ const getPicture = asyncHandler(async (req, res, next) => {
     var photos = db.getCollection('photos')
     const captureId = req.params.captureId
 
-    // fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
-    //     if (!err) {
-    //         console.log('received data: ' + data);
-
-    //         response.writeHead(200, {'Content-Type': 'text/html'});
-    //         response.write(data);
-    //         response.end();
-    //     } else {
-    //         console.log(err);
-    //     }
-    // });
     var result = photos.find({ id: captureId })
 
     try {
-        // const filePath = path.join(appDir, `pictures/${captureId}.jpg`)
-        // var contents = fs.readFileSync(filePath, 'utf8')
-
         res.send(result[0] || {})
     } catch (error) {
         next(error)
